@@ -10,32 +10,49 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
+
+
         double r;
+        System.out.println("Enter a 1 is you are male or a 2 if you are female: ");
+        int gender = input.nextInt();
 
+        if (gender == 1) {
+            r = 0.73;
+        } else r = 0.66;
 
-            System.out.println("Enter a 1 is you are male or a 2 if you are female: ");
-            int gender = input.nextInt();
-            if (gender == 1) {
-                r = 0.73;
-            } else r = 0.66;
+        System.out.println("How many ounces of alcohol did you have?");
 
-            System.out.println("How many ounces of alcohol did you have?");
+        if (!input.hasNextInt()) {
+            System.out.println("Invalid");
+            input.next();
+        } else {
             int ounces = input.nextInt();
 
-
             System.out.println("What is your weight, in pounds?");
-            int weight = input.nextInt();
+            if (!input.hasNextInt()) {
+                System.out.println("Invalid");
+                input.next();
+            } else {
+                int weight = input.nextInt();
 
-            while (!input.hasNextInt()) input.next();
-            int hours = input.nextInt();
+                System.out.println("How many hours has it been since your last drink?");
+                if (!input.hasNextInt()) {
+                    System.out.println("Invalid");
+                    input.next();
+                } else {
+                    int hours = input.nextInt();
 
+                    double BAC = ounces * 5.14 / weight * r - .015 * hours;
 
-            double BAC = ounces * 5.14 / weight * r - .015 * hours;
+                    System.out.printf("Your BAC is: %.6f\n", BAC);
 
-            System.out.printf("Your BAC is: %.6f\n", BAC);
-
-            System.out.println( BAC <= 0.08
-                    ? "It is legal for you to drive."
-                    : "It is not legal for you to drive.");
+                    System.out.println(BAC <= 0.08
+                            ? "It is legal for you to drive."
+                            : "It is not legal for you to drive.");
+                }
+            }
+        }
     }
 }
+
+
